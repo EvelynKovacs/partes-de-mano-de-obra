@@ -1,0 +1,10 @@
+insert into estado (id,nombre,descripcion) values (1,'generado','Parte de Mano de Obra generado');
+insert into estado (id,nombre,descripcion) values (2,'válido','Parte de Mano de Obra válido');
+insert into estado (id,nombre,descripcion) values (3,'inválido','Parte de Mano de Obra inválido');
+insert into estado (id,nombre,descripcion) values (4,'validado','Parte de Mano de Obra validado por supervisor');
+insert into estado (id,nombre,descripcion) values (5,'corregido','Parte de Mano de Obra corregido');
+insert into estado (id,nombre,descripcion) values (6,'rechazado','Parte de Mano de Obra rechazado');
+insert into estado (id,nombre,descripcion) values (7,'anulado','Parte de Mano de Obra anulado');
+insert into estado (id,nombre,descripcion) values (8,'caducado','log de validación caducado');
+insert into estado (id,nombre,descripcion) values (10,'generado','log de validación generado');
+insert into estado (id,nombre,descripcion) values (11,'validado','log de validación validado');

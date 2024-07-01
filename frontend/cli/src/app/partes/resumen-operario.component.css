@@ -1,0 +1,20 @@
+.table-success {
+    background-color: #28a745; 
+}
+
+.table-danger {
+    background-color: #dc3545; 
+}
+
+.table-warning {
+    background-color: #ffc107; 
+}
+
+.table-info {
+    background-color: #17a2b8; 
+}
+.checkbox-label {
+    background-color: rgb(245, 248, 248);
+    padding: 5px; 
+    border-radius: 5px; 
+  }

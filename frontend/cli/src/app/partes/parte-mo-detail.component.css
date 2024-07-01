@@ -1,0 +1,86 @@
+
+.parte-header {
+  margin-top: 20px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  flex-grow: 1;
+}
+.parte-header code {
+  color: black; 
+}
+.ultimo-header  {
+  color: rgb(240, 233, 240); 
+}
+
+
+.nombre-input {
+    padding: 5px;
+    margin-bottom: 10px;
+    
+}
+
+.error-message {
+  color: red;
+}
+
+.cuit-input{
+
+padding: 5px;
+margin-bottom: 10px;
+opacity: 0.6;
+}
+
+.back-button {
+  margin-top: 20px;
+  background-color: #e7b2e7;
+  padding: 5px 10px;
+  color: rgb(15, 15, 15);
+  cursor: pointer;
+  border-radius: 20px;
+}
+.btn-save {
+  background-color: #45ac15; 
+  padding: 5px 10px;
+  color: rgb(5, 5, 5);
+  cursor: pointer;
+  border-radius: 20px;
+  margin-left: 10px;
+  transition: opacity 0.3s ease; 
+
+}
+
+.reset-button {
+  margin-top: 20px;
+  background-color: #bfc219;
+  padding: 5px 10px;
+  color: rgb(15, 15, 15);
+  cursor: pointer;
+  border-radius: 20px;
+}
+.btn-round {
+border-radius: 45%; 
+padding: 5px 5px; 
+color: rgb(5, 5, 5);
+}
+.fields-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-group > div {
+  width: 85%; 
+}
+
+.nombre-input,
+.cuit-input{
+  width: calc(100% - 30px); 
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 10px; 
+}

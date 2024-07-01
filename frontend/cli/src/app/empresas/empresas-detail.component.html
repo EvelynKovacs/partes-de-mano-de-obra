@@ -1,0 +1,80 @@
+<div *ngIf="empresa" class="empresa-container">
+  <h2 class="empresa-header">
+    Empresa: <code>{{ empresa.name | uppercase }}</code>
+  </h2>
+  <form #form="ngForm" class="form-container">
+    <div class="input-group">
+      <div class="fields-container">
+        <div class="input-group">
+          <label for="name">Nombre:</label>
+          <input
+            name="name"
+            placeholder="Nombre"
+            [(ngModel)]="empresa.name"
+            required
+            pattern="\S.*"
+            #name="ngModel"
+            class="nombre-input"
+          />
+
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="error-message"
+          >
+            <div *ngIf="name.errors?.['required']">
+              El nombre de la empresa es requerido.
+            </div>
+            <div *ngIf="name.errors?.['pattern']">
+              El nombre no puede tener espacios en blanco.
+            </div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="cuit">Cuit:</label>
+          <input
+            name="cuit"
+            placeholder="Cuit"
+            [(ngModel)]="empresa.cuit"
+            (ngModelChange)="empresa.cuit = applyCUITMask($event); showCUITErrorMessage($event)"
+            required
+            pattern="\S.*"
+            #cuit="ngModel"
+            class="cuit-input"
+            maxlength="13"
+          />
+          <div
+            *ngIf="cuit.invalid && (cuit.dirty || cuit.touched)"
+            class="error-message"
+          >
+            <div *ngIf="cuit.errors?.['required']">El cuit es requerido.</div>
+            <div *ngIf="cuit.errors?.['pattern']">
+              El cuit no puede tener espacios en blanco.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="observations">Observaciones:</label>
+      <textarea
+        name="observations"
+        placeholder="Observaciones"
+        [(ngModel)]="empresa.observations"
+        class="observations-input"
+      ></textarea>
+    </div>
+
+    <div class="button-group">
+      <button (click)="goBack()" class="back-button">Atrás</button>
+      <button
+        *ngIf="!isAnyFieldRequiredMissing()"
+        (click)="save()"
+        [ngClass]="{ 'btn-save': true }"
+        [disabled]="form.invalid"
+        [style.opacity]="form.invalid ? '0.5' : '1'"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

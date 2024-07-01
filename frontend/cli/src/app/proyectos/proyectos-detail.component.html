@@ -1,0 +1,195 @@
+<div *ngIf="proyecto" class="proyecto-container">
+  <h2 class="proyecto-header">
+    Proyecto: <code>{{ proyecto.code | uppercase }}</code>
+  </h2>
+</div>
+<form #form="ngForm" class="form-container">
+  <div class="input-group">
+    <div class="fields-container">
+      <div class="input-group">
+        <label for="empresa">Cliente: </label>
+        <br />
+        <input
+          [(ngModel)]="proyecto.empresa"
+          name="name"
+          placeholder="Buscar Cliente por Nombre o Cuit"
+          class="form-control"
+          [ngbTypeahead]="searchEmpresa"
+          [resultFormatter]="resultFormat"
+          [inputFormatter]="inputFormat"
+          required
+          pattern="\S.*"
+          #name="ngModel"
+          class="nombre-input"
+        />
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          class="error-message"
+        >
+          <div *ngIf="name.errors?.['required']">
+            El nombre de la empresa es requerido.
+          </div>
+          <div *ngIf="name.errors?.['pattern']">
+            El nombre de la empresa no puede empezar con espacios en blanco.
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="cuit">Cuit:</label>
+        <input
+          [(ngModel)]="proyecto.empresa.cuit"
+          name="cuit"
+          placeholder="Cuit"
+          required
+          class="cuit-input"
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+  <div class="input-group">
+    <div class="fields-container">
+      <div class="input-group">
+        <label for="code">Código:</label>
+        <br />
+        <input
+          [(ngModel)]="proyecto.code"
+          name="code"
+          placeholder="Código"
+          required
+          pattern="[0-9]+"
+          #code="ngModel"
+          class="nombre-input"
+        />
+        <div
+          *ngIf="code.invalid && (code.dirty || code.touched)"
+          class="error-message"
+        >
+          <div *ngIf="code.errors?.['required']">
+            El código del proyecto es requerido.
+          </div>
+          <div *ngIf="code.errors?.['pattern']">
+            El código debe contener solo numeros.
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="description">Descripción:</label>
+        <input
+          name="description"
+          placeholder="Descripción"
+          [(ngModel)]="proyecto.description"
+          required
+          pattern="\S.*"
+          #desc="ngModel"
+          class="nombre-input"
+        />
+        <div
+          *ngIf="desc.invalid && (desc.dirty || desc.touched)"
+          class="error-message"
+        >
+          <div *ngIf="desc.errors?.['required']">
+            La descripción del proyecto es requerido.
+          </div>
+          <div *ngIf="desc.errors?.['pattern']">
+            La descripción no puede empezar con espacios en blanco.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="proyecto-header">Tareas</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>
+            <button (click)="addTarea()" class="btn btn-primary btn-round">
+              Nuevo
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let tarea of isNew ? tareasTemporales : proyecto.tareas;
+            index as i
+          "
+        >
+          <td>{{ i }}</td>
+          <td>
+            <input
+              name="code{{ i }}"
+              [(ngModel)]="tarea.code"
+              class="form-control"
+              #code="ngModel"
+              required
+              pattern="[0-9]+"
+            />
+            <div
+            *ngIf="code.invalid && (code.dirty || code.touched)"
+            class="error-message"
+          >
+            <div *ngIf="code.errors?.['required']">
+              El código de la tarea es requerido.
+            </div>
+            <div *ngIf="code.errors?.['pattern']">
+              El código debe contener solo numeros.
+            </div>
+          </div>
+          </td>
+
+          <td>
+            <input
+              name="description{{ i }}"
+              [(ngModel)]="tarea.description"
+              class="form-control"
+              type="string"
+              #desc="ngModel"
+              pattern="\S.*"
+              required
+            />
+            <div
+            *ngIf="desc.invalid && (desc.dirty || desc.touched)"
+            class="error-message"
+          >
+            <div *ngIf="desc.errors?.['required']">
+              La descripcion de la tarea es requerida.
+            </div>
+            <div *ngIf="desc.errors?.['pattern']">
+              La descripción no puede empezar con espacios en blanco.
+            </div>
+          
+          </div>
+          </td>
+
+          <td>
+            <button (click)="removeTarea(tarea)" class="btn btn-default">
+              <i class="fa fa-trash"
+              aria-hidden="true"
+              style="color: rgb(207, 5, 5)"></i
+            >
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="button-group">
+    <button (click)="goBack()" class="back-button">Atrás</button>
+    <button
+      *ngIf="!isAnyFieldRequiredMissing()"
+      (click)="save()"
+      class="btn-save"
+      [disabled]="form.invalid"
+    >
+      Guardar
+    </button>
+  </div>
+</form>

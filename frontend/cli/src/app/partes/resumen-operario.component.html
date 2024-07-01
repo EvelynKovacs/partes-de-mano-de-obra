@@ -1,0 +1,140 @@
+
+<h2 class="parte-header">Resumen Operario/Día</h2>
+<label for="fecha">Fecha:</label>
+<br />
+<form class="row row-cols-sm-auto" (ngSubmit)="buscarParteFecha()">
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        class="form-control"
+        style="display: inline-block"
+        placeholder="yyyy-mm-dd"
+        name="fpp"
+        ngbDatepicker
+        [(ngModel)]="fechaSeleccionada"
+        #fpp="ngbDatepicker"
+        required
+      />
+      <button
+        class="btn btn-outline-secondary fa fa-calendar"
+        (click)="fpp.toggle()"
+        type="button"
+      ></button>
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Buscar/Refrescar</button>
+    &nbsp;
+          <button *ngIf="filtroSeleccionado!='validos'"
+          class="btn btn-success"
+          (click)="validar()"
+          [disabled]=" isValidaLoading"
+          style="float: right; margin-left: 20px;">
+      <ng-container *ngIf="isValidaLoading; else noLoadingValida">
+          <mat-spinner diameter="20"></mat-spinner>
+      </ng-container>
+      <ng-template #noLoadingValida>
+          Validar
+      </ng-template>
+      </button>
+     
+
+      &nbsp;
+      <label class="checkbox-label">
+        <input type="checkbox" (change)="seleccionarFiltro('invalidos')" [checked]="filtroSeleccionado === 'invalidos'">
+        Inválidos
+      </label>
+      &nbsp;
+      <label class="checkbox-label">
+        <input type="checkbox" (change)="seleccionarFiltro('validos')" [checked]="filtroSeleccionado === 'validos'">
+        Válidos
+      </label>
+      &nbsp;
+      <label class="checkbox-label">
+        <input type="checkbox" (change)="seleccionarFiltro('todos')" [checked]="filtroSeleccionado === 'todos'">
+        Todos
+      </label>
+      
+    
+  </div>
+
+</form>
+&nbsp;
+<div class="table.responsive">
+  <table
+    class="table table-striped table-sm"
+    style="font-family: Arial, sans-serif"
+  >
+    <thead>
+      <tr>
+        <th>#</th>
+        <th></th>
+        <th>Fecha</th>
+        <th>Legajo</th>
+        <th>Nombre</th>
+        <th>Ingreso</th>
+        <th>Egreso</th>
+        <th>Horas</th>
+        <th>Horas Partes</th>
+        <th>Estado</th>
+        <th>Partes</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+       <ng-container *ngFor="let partes of (resultsPage.content ? resultsPage.content : resultsPage.data); index as i">
+        
+        <tr>
+          <td>{{ (currentPage - 1) * sizePage + i + 1 }}</td>
+          <td><i 
+            class="fa"
+            [ngClass]="{
+              'fa-check text-success': partes.estado === 'válido',
+              'fa-thumbs-up text-success': partes.estado === 'validado',
+              'fa-exclamation-triangle text-danger': partes.estado === 'inválido',
+              'fa-times-circle': partes.estado === 'rechazado',
+              'fa-plus-circle': partes.estado === 'generado',
+              'fa-edit': partes.estado === 'corregido' || partes.estado === 'modificado'
+            }"
+          [style.color]="partes.estado === 'corregido' ? 'yellow' : (partes.estado === 'generado' ? '#00BFFF' : (partes.estado === 'válido' || partes.estado === 'válidado') ? 'green' : null)"
+
+      ></i></td>
+          <td>{{  partes.fecha}}</td>
+          <td>{{  partes.legajo}}</td>
+          <td>{{ partes.nombre}}</td>
+          <td>{{ partes.ingreso }}</td>
+          <td>{{ partes.egreso }}</td>
+          <td>{{ partes.horas }}</td>
+          <td>{{ partes.horasPartes }}</td>
+          <td>{{ partes.estado }}</td>
+         <td> <a routerLink="/Partes/operario/{{partes.legajo}}/{{partes.fecha | date: 'yyyy-MM-dd'}}"
+              ><i class="fa fa-eye"></i
+            ></a></td>
+            
+        </tr>
+      </ng-container>
+
+
+    </tbody>
+    
+     <tfoot>
+      <td  *ngIf="resultsPage"    colspan="6">
+        <div class="d-flex justify-content-center mt-0">
+          <app-pagination
+            [totalPages]="resultsPage.totalPages"
+            [currentPage]="currentPage"
+            (pageChangeRequested)="onPageChangeRequested($event)"
+            [number]="resultsPage.number"
+            [hidden]="resultsPage.numberOfElements < 1"
+          ></app-pagination>
+        </div>
+      </td>
+      
+  </table>
+</div>
+
+
+
+
+
+

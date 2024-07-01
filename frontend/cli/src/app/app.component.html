@@ -1,0 +1,56 @@
+<style>
+  .link {
+    color: inherit; /* Toma el color del texto del contenedor padre */
+    text-decoration: none; /* Elimina el subrayado */
+  }
+</style>
+<body>
+  <div class="header">
+    <h5 class="my-0 mr-md-auto font-weight-normal">
+      <a href="" class="link">Partes de Mano de Obra</a>
+    </h5>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <a href="Empresas" class="link">Empresas (Clientes)</a>
+      </button>
+      <div class="dropdown-content">
+        <a href="Empresas">Listar</a>
+        <a href="Empresas/Nueva">Nueva</a>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <a href="Proyectos" class="link">Proyectos</a>
+      </button>
+      <div class="dropdown-content">
+        <a href="Proyectos">Listar</a>
+        <a href="Proyectos/Nuevo">Nuevo</a>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <a href="Operarios" class="link">Operarios</a>
+      </button>
+      <div class="dropdown-content">
+        <a href="Operarios">Listar</a>       
+         <a href="Operarios/Nuevo">Nuevo</a>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <a href="Partes" class="link">Partes</a>
+      </button>
+      <div class="dropdown-content">
+        <a href="Partes/Nuevo">Cargar Partes</a>       
+         <a href="Resumen">Resumen Operario</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</body>

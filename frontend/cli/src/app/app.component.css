@@ -1,0 +1,81 @@
+body {
+  background-image: url("../assets/arq.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  background-color: rgba(228, 217, 217, 0.9);
+  border-radius: 0px;
+  position: relative;
+  z-index: 2;
+}
+
+.header h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #0a0b0a;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.dropdown {
+  position: relative;
+  margin-left: 10px;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+.dropbtn:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  font-size: 15px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.separator {
+  border-left: 1px solid #1a1919;
+  height: 24px;
+  margin: 0 5px;
+}

@@ -1,0 +1,186 @@
+<div *ngIf="operario" class="operario-container">
+    <h2 class="operario-header">
+      Operario: <code>{{ operario.name | uppercase }}</code>
+    </h2>
+    <form #form="ngForm" class="form-container">
+      <div class="input-group">
+        <div class="fields-container">
+          <div class="input-group">
+            <label for="name">Nombre:</label>
+            <input
+              name="name"
+              placeholder="Nombre"
+              [(ngModel)]="operario.name"
+              required
+              pattern="\S.*"
+              #name="ngModel"
+              class="nombre-input"
+            />
+  
+            <div
+              *ngIf="name.invalid && (name.dirty || name.touched)"
+              class="error-message"
+            >
+              <div *ngIf="name.errors?.['required']">
+                El nombre del operario es requerido.
+              </div>
+              <div *ngIf="name.errors?.['pattern']">
+                El nombre no puede tener espacios en blanco.
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="legajo">Legajo:</label>
+            <input
+              name="legajo"
+              placeholder="Legajo"
+              [(ngModel)]="operario.legajo"
+              required
+              pattern="\S.*"
+              #legajo="ngModel"
+              class="legajo-input"
+              maxlength="13"
+            />
+            <div
+              *ngIf="legajo.invalid && (legajo.dirty || legajo.touched)"
+              class="error-message"
+            >
+              <div *ngIf="legajo.errors?.['required']">El legajo es requerido.</div>
+              <div *ngIf="legajo.errors?.['pattern']">
+                El legajo no puede tener espacios en blanco.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="categoria">Categoria:</label>
+        <select name="categoria" [(ngModel)]="operario.category" class="categoria-input">
+            <option *ngFor="let categoria of categoriasNombres" [ngValue]="categoria">
+                {{ categoria }}
+            </option>
+        </select>
+    </div>
+  </form>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fecha Desde</th>
+                <th>Fecha Hasta</th>
+                <th>Turno</th>
+                <th>
+                  <button (click)="addTurno()" class="btn btn-success">
+                    Agregar
+                  </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ht of operario.historialTurnos; index as i">
+                <td>{{i}}</td>
+              
+                <td>
+                  <div style="display: flex; align-items: center;">
+                    <input [(ngModel)]="ht.fechaDesde" 
+                           (ngModelChange)="onFechaDesdeChange(i)" 
+                           name="fechaDesde{{i}}"  
+                           class="form-control" 
+                           placeholder="yyyy-mm-dd" 
+                           ngbDatepicker 
+                           #fechaDesde="ngbDatepicker" 
+                           readonly
+                           required/>
+                    <button class="btn btn-outline-secondary fa fa-calendar" 
+                            (click)="fechaDesde.toggle()" 
+                            type="button" 
+                            style="margin-left: 5px;"></button>
+                  </div>
+                </td>
+                <td >
+                  <div style="display: flex; align-items: center;">
+                    <input [(ngModel)]="ht.fechaHasta" 
+                           [disabled]="!ht.fechaDesde" 
+                           name="fechaHasta{{i}}"  
+                           class="form-control" 
+                           placeholder="yyyy-mm-dd" 
+                           ngbDatepicker 
+                           #fechaHasta="ngbDatepicker" 
+                           readonly
+                           [minDate]="ht.fechaDesde"  />
+                    <button  
+                            class="btn btn-outline-secondary fa fa-calendar" 
+                            (click)="fechaHasta.toggle()" 
+                            type="button" 
+                            style="margin-left: 5px;"></button>
+                  </div>
+                </td>
+                <td>
+                    <div class="col-md-12">
+                        <input 
+                            [(ngModel)]="ht.tipoTurno"
+                            name="tipoTurno{{i}}"
+                            class="form-control"
+                            placeholder="tipoTurno"
+                            [ngbTypeahead]="searchTipoTurnos"
+                            [editable]=false
+                            [resultFormatter]="resultFormatNombre"
+                            [inputFormatter]="inputFormatNombre"
+                            required
+                        >
+                    </div>
+                  </td>
+                
+                
+                  <td>
+                    <button (click)="borrarHistoricoTurno(ht)" class = "btn btn-default">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex align-items-center">
+  <div
+    *ngIf="showSuccessMessage || showSuccessModificacion"
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    <span *ngIf="showSuccessMessage">Agregado Correctamente</span>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="
+        showSuccessMessage = false
+      "
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+
+       <div class="button-group">
+        <button (click)="goBack()" class="back-button">Atrás</button>
+        <button
+          (click)="save()"
+          [ngClass]="{ 'btn-save': true }"
+          [disabled]="!form.valid || !isFormValid()"
+          [style.opacity]="!form.valid || !isFormValid()
+            ? '0.5'
+            : '1'
+        "
+        >
+          Guardar
+        </button>
+        
+      </div> 
+
+  </div>
+  
