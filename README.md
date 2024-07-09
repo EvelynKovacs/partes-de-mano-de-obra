@@ -10,7 +10,7 @@ Instalar <a href="https://git-scm.com/download/linux">Git</a>
 
 
 
-Instalar Docker y Docker Compose
+Instalar <a href="https://docs.docker.com/engine/install/ubuntu/">Docker</a> y <a href="https://docs.docker.com/compose/install/">Docker Compose</a>
 
 ¡CONFIGURACIÓN IMPORTANTE ANTES DE CONTINUAR!
 
