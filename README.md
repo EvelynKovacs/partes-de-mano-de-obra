@@ -59,11 +59,7 @@ Iniciar servicio docker sudo systemctl start docker
 Este comando puede variar según la distro de linux utilizada.
 
 
-Instalar <a href="https://www.postman.com/downloads/">Postman</a> y <a href="https://dbeaver.io/download/
-">DBeaver</a>
 
-Instalar un editor de texto para escribir el código, se recomienda <a href="https://code.visualstudio.com/download
-">VS Code.</a>
 
 
 
