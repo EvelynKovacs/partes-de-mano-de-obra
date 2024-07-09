@@ -18,6 +18,7 @@ Instalar <a href="https://docs.docker.com/engine/install/ubuntu/">Docker</a> y <
 No olvidar los pasos de post instalación para ejecutar docker sin priviliegios de root.
 
 sudo groupadd docker
+
 sudo usermod -aG docker $USER
 
 
@@ -31,6 +32,7 @@ newgrp docker
 Opcional: Para que docker no arranque de forma automática al inicio:
 
 sudo systemctl disable docker.service
+
 sudo systemctl disable containerd.service
 
 
@@ -57,11 +59,11 @@ Iniciar servicio docker sudo systemctl start docker
 Este comando puede variar según la distro de linux utilizada.
 
 
+Instalar <a href="https://www.postman.com/downloads/">Postman</a> y <a href="https://dbeaver.io/download/
+">DBeaver</a>
 
-Instalar Postman y DBeaver
-
-
-Instalar un editor de texto para escribir el código, se recomienda VS Code.
+Instalar un editor de texto para escribir el código, se recomienda <a href="https://code.visualstudio.com/download
+">VS Code.</a>
 
 
 
