@@ -1,9 +1,72 @@
-### Laboratorio de Programación y lenguajes
-### Trabajo Práctico
+
 # Partes de Mano de Obra
 
-Para la instalación y configuración del entorno de desarrollo es necesario seguir el siguiente 
-<a href="https://git.fi.mdn.unp.edu.ar/labprog/core/infraestructura-tps/-/blob/master/README.md" target="_blank">INSTRUCTIVO</a>
+Setup
+
+Software necesario previamente
+
+
+Instalar <a href="https://git-scm.com/download/linux">Git</a>
+
+
+
+Instalar Docker y Docker Compose
+
+¡CONFIGURACIÓN IMPORTANTE ANTES DE CONTINUAR!
+
+
+No olvidar los pasos de post instalación para ejecutar docker sin priviliegios de root.
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+
+Para hacer efectivos los cambios en los grupos, reiniciar la terminal o ejecutar
+
+newgrp docker
+
+
+
+
+Opcional: Para que docker no arranque de forma automática al inicio:
+
+sudo systemctl disable docker.service
+sudo systemctl disable containerd.service
+
+
+
+Crear el archivo /etc/docker/daemon.json con el siguiente conenido:
+
+{
+  "userns-remap": "TU_NOMBRE_DE_USUARIO"
+}
+
+
+
+Editar los archivos /etc/subuid y /etc/subgid. Agregar la línea:
+
+TU_NOMBRE_DE_USUARIO:1000:65536
+
+
+
+
+
+
+Iniciar servicio docker sudo systemctl start docker
+
+Este comando puede variar según la distro de linux utilizada.
+
+
+
+Instalar Postman y DBeaver
+
+
+Instalar un editor de texto para escribir el código, se recomienda VS Code.
+
+
+
+
+
 
 ---
 
