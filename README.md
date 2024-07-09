@@ -58,12 +58,17 @@ Iniciar servicio docker sudo systemctl start docker
 
 Este comando puede variar según la distro de linux utilizada.
 
+Luego clonar este repositorio con la url ssh.
 
+Ir al directorio clonado cd <repo_dir>
 
+Dar permisos de ejecución al script lpl: chmod +x lpl.
 
+Hacer el build de las imágenes Docker ./lpl build
 
+Levantar los servidores ./lpl up
 
-
+Verificar funcionamiento ingresando a http://localhost:4200/
 
 
 ---
