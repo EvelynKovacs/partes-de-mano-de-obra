@@ -58,7 +58,7 @@ Iniciar servicio docker sudo systemctl start docker
 
 Este comando puede variar según la distro de linux utilizada.
 
-Luego clonar este repositorio con la url ssh.
+Luego clonar este repositorio con la url.
 
 Ir al directorio clonado cd <repo_dir>
 
@@ -68,7 +68,19 @@ Hacer el build de las imágenes Docker ./lpl build
 
 Levantar los servidores ./lpl up
 
+Ir al directorio de frontend/cli, una vez dentro de cli, ejecutar: npm install
+
+Bajar los servidores ./lpl down 
+
+volver a levantar los servidores ./lpl up 
+
 Verificar funcionamiento ingresando a http://localhost:4200/
+
+Luego instalar las dependencias dentro del directorio clonado con: docker compose run --rm testing npm install
+
+y ejecutar el test : ./lpl test
+
+aca ya deberia poderse ver en http://localhost:4200/ el programa con datos cargados desde el test.
 
 
 ---
